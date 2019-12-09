@@ -1,5 +1,15 @@
 library(ggplot2)
 
+makeList <- function(x){
+  rlt <- list()
+  for(i in 1:length(x)){
+    rlt[[i]] <- i
+  }
+  names(rlt) <- x
+  rlt
+}
+
+
 aacBoxPlot <- function(numerator, denominator = NULL,
                        idx_sel = NULL, ylab){
   num <- 0
