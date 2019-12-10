@@ -71,6 +71,16 @@ shinyUI(
         ),
         
         tags$div(
+          title = "Select race/ethnicity group(s) to include in the figure",
+          checkboxGroupInput(
+            "race",
+            label = h4("Race/Ethnicity"),
+            choices = makeList(race_group),
+            selected = 1:length(race_group)
+          )
+        ),
+        
+        tags$div(
           title = "Select sex to include in the figure",
           checkboxGroupInput(
             "sex",
