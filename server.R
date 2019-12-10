@@ -10,7 +10,24 @@ load("www/500KClean.RData")
 shinyServer(function(input, output, session) {
   
   getMeta <- reactive({
-    
+    if(input$meta == "analytes"){
+      ana_sel <- input$analyte
+      if(length(ana_sel) == 0){
+        ## ERROR MESSAGE
+      } else if(length(ana_sel) == 1){
+        meta <- meta_data[, as.integer(ana_sel)]
+        names(meta) <- analytes_all[as.integer(ana_sel)]
+        return(meta)
+      } else {
+        meta <- rowSums(meta_data[, as.integer(ana_sel)])
+        names(meta) <- paste( analytes_all[as.integer(ana_sel)], collapse = " + ")
+        return(meta)
+      }
+      
+    } else {
+      num_sel <- input$numerator
+      den_sel <- input$denominator
+    }
   })
   
   bwIndex <- reactive({
@@ -59,4 +76,8 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  
+  output$boxplot <- renderPlot({
+    
+  })
 })

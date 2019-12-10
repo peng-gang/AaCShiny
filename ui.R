@@ -13,17 +13,18 @@ shinyUI(
         width = 3,
         tabsetPanel(
           type = "tabs",
-          id = "analytes",
+          id = "meta",
           tabPanel(
-            "Single",
-            value = "single",
+            "Analytes",
+            value = "analytes",
             tags$div(
-              title = "Select an analyte",
+              title = "Select one or multiple analytes",
               selectInput(
                 "analyte",
                 label = h4("Analyte"),
-                choices = analytes_all,
-                selected = "C3"
+                choices = makeList(analytes_all),
+                multiple = TRUE,
+                selected = which(analytes_all=="C3")
               )
             )
           ),
@@ -35,14 +36,16 @@ shinyUI(
               selectInput(
                 "numerator",
                 label = h4("Numerator"),
-                choices = analytes_all,
-                selected = "C3"
+                choices = makeList(analytes_all),
+                multiple = TRUE,
+                selected =  which(analytes_all=="C3")
               ),
               selectInput(
                 "denominator",
                 label = h4("Denominator"),
-                choices = analytes_all,
-                selected = "C2"
+                choices = makeList(analytes_all),
+                multiple = TRUE,
+                selected =  which(analytes_all=="C2")
               )
             )
           )
