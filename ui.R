@@ -1,7 +1,7 @@
 library(shiny)
 
 source("parameters.R")
-
+source("functions.R")
 
 shinyUI(
   fluidPage(
@@ -59,7 +59,7 @@ shinyUI(
             "bw",
             label = h4("Birth Weight (g)"),
             choices = makeList(bw_group),
-            selected = 1:length(bw_group)
+            selected = 2:4
           )
         ),
         
@@ -69,7 +69,7 @@ shinyUI(
             "ga",
             label = h4("Gestational Age (week)"),
             choices = makeList(ga_group),
-            selected = 1:length(ga_group)
+            selected = 2:4
           )
         ),
         
@@ -99,7 +99,7 @@ shinyUI(
             "tpn",
             label = h4("TPN"),
             choices = makeList(tpn_group),
-            selected = 1:length(tpn_group)
+            selected = 1
           )
         )
       ),

@@ -10,23 +10,7 @@ makeList <- function(x){
 }
 
 
-aacBoxPlot <- function(numerator, denominator = NULL,
-                       idx_sel = NULL, ylab){
-  num <- 0
-  for(n in numerator){
-    num <- num + meta_data[, n]
-  }
-  x <- NULL
-  if(is.null(denominator)){
-    x <- num
-  } else {
-    dem <- 0
-    for(d in denominator){
-      dem <- dem + meta_data[, d]
-    }
-    x <- num / dem
-  }
-  
+aacBoxPlot <- function(x, flag_aac, idx_include, idx_sel = NULL, ylab){
   dplot <- data.frame(
     x = x,
     aac = flag_aac
@@ -38,30 +22,24 @@ aacBoxPlot <- function(numerator, denominator = NULL,
     dplot <- dplot[idx_include & idx_sel, ]
   }
   
+  num_pre <- sum(dplot$aac == "<24")
+  num_mid <- sum(dplot$aac == "24-48")
+  num_post <- sum(dplot$aac == "49-168")
+  
   gp <- ggplot(dplot) + geom_boxplot(aes(x=aac, y = x)) + 
-    labs(x="Age at Blood Collection", y = ylab) + 
-    theme_light()
+    geom_hline(yintercept = median(dplot$x[dplot$aac == "24-48"]), color = "#E18727FF") + 
+    labs(x="Age at Blood Collection (Hour)", y = ylab) + 
+    scale_x_discrete(
+      labels = c(
+        paste0("<24\n(n=", num_pre, ")"),
+        paste0("24-48\n(n=", num_mid, ")"),
+        paste0("49-168\n(n=", num_post, ")"))) + 
+    theme_light() + theme(text = element_text(size = 18))
   
   gp
 }
 
-aacTrend <- function(numerator, denominator = NULL,
-                     idx_sel = NULL, ylab){
-  num <- 0
-  for(n in numerator){
-    num <- num + meta_data[, n]
-  }
-  x <- NULL
-  if(is.null(denominator)){
-    x <- num
-  } else {
-    dem <- 0
-    for(d in denominator){
-      dem <- dem + meta_data[, d]
-    }
-    x <- num / dem
-  }
-  
+aacTrend <- function(x, aac, idx_include, idx_sel = NULL, ylab){
   dplot <- data.frame(
     x = x,
     aac = aac
@@ -74,8 +52,8 @@ aacTrend <- function(numerator, denominator = NULL,
   }
   
   gp <- ggplot(dplot) + geom_smooth(aes(x=aac, y = x), method = "gam", formula = y ~ s(x, bs = "cs")) + 
-    labs(x="Age at Blood Collection (Hour)", y = ylab) + 
-    theme_light()
+    labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = ylab) + 
+    theme_light() + theme(text = element_text(size = 18))
   
   gp
 }

@@ -18,13 +18,13 @@ shinyServer(function(input, output, session) {
           session, "analyte", selected = which(analytes_all=="C3")
         )
         meta <- meta_data[, which(analytes_all=="C3")]
-        return(list(meata=meta, name = "C3"))
+        return(list(meta=meta, name = "C3"))
       } else if(length(ana_sel) == 1){
         meta <- meta_data[, as.integer(ana_sel)]
-        return(list(meata=meta, name = analytes_all[as.integer(ana_sel)]))
+        return(list(meta=meta, name = analytes_all[as.integer(ana_sel)]))
       } else {
         meta <- rowSums(meta_data[, as.integer(ana_sel)])
-        return(list(meata=meta, name = paste(analytes_all[sort(as.integer(ana_sel))], collapse = " + ")))
+        return(list(meta=meta, name = paste(analytes_all[sort(as.integer(ana_sel))], collapse = " + ")))
       }
     } else {
       num_sel <- input$numerator
@@ -66,7 +66,7 @@ shinyServer(function(input, output, session) {
       }
       
       meta <- meta_num / meta_den
-      return(list(meata=meta, name = paste0(name_num, "/", name_den)))
+      return(list(meta=meta, name = paste0(name_num, "/", name_den)))
     }
   })
   
@@ -118,6 +118,13 @@ shinyServer(function(input, output, session) {
   
   
   output$boxplot <- renderPlot({
-    hist(rnorm(100), main = getMeta()$name)
+    idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
+    aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
+  })
+  
+  
+  output$trendplot <- renderPlot({
+    idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
+    aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
   })
 })
