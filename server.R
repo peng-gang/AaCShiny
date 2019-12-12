@@ -14,6 +14,14 @@ shinyServer(function(input, output, session) {
       ana_sel <- input$analyte
       if(length(ana_sel) == 0){
         ## ERROR MESSAGE
+        showModal(
+          modalDialog(
+            title = "Warning!",
+            "At least one analyte should be selected and the default analyte is selected",
+            easyClose = TRUE
+          )
+        )
+        
         updateSelectInput(
           session, "analyte", selected = which(analytes_all=="C3")
         )
@@ -36,6 +44,13 @@ shinyServer(function(input, output, session) {
       
       if(length(num_sel) == 0){
         ## ERROR MESSAGE
+        showModal(
+          modalDialog(
+            title = "Warning!",
+            "At least one analyte should be selected and the default analyte is selected",
+            easyClose = TRUE
+          )
+        )
         updateSelectInput(
           session, "numerator", selected = which(analytes_all=="C3")
         )
@@ -52,6 +67,13 @@ shinyServer(function(input, output, session) {
       
       if(length(den_sel) == 0){
         ## ERROR MESSAGE
+        showModal(
+          modalDialog(
+            title = "Warning!",
+            "At least one analyte should be selected and the default analyte is selected",
+            easyClose = TRUE
+          )
+        )
         updateSelectInput(
           session, "denominator", selected = which(analytes_all=="C2")
         )
