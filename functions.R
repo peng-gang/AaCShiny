@@ -53,6 +53,7 @@ aacTrend <- function(x, aac, idx_include, idx_sel = NULL, ylab){
   
   gp <- ggplot(dplot) + geom_smooth(aes(x=aac, y = x), method = "gam", formula = y ~ s(x, bs = "cs")) + 
     labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = ylab) + 
+    scale_x_continuous(breaks = seq(0, 168, 24), minor_breaks = NULL) + 
     theme_light() + theme(text = element_text(size = 18))
   
   gp

@@ -101,7 +101,9 @@ shinyUI(
             choices = makeList(tpn_group),
             selected = 1
           )
-        )
+        ),
+        
+        p("User Guide")
       ),
       
       mainPanel(

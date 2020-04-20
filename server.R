@@ -149,4 +149,5 @@ shinyServer(function(input, output, session) {
     idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
     aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
   })
+  
 })
