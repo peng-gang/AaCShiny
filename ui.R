@@ -103,6 +103,15 @@ shinyUI(
           )
         ),
         
+        hr(),
+        
+        tags$div(
+          title = "Compare difference between groups within the selected category",
+          radioButtons("compare", label = h3("Select comparing groups"),
+                       choices = c(makeList(compare_group)), 
+                       selected = 1)
+        ),
+        
         p("User Guide")
       ),
       

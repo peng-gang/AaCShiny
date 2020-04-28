@@ -1,4 +1,5 @@
 library(ggplot2)
+library(ggsci)
 
 makeList <- function(x){
   rlt <- list()
@@ -54,6 +55,56 @@ aacTrend <- function(x, aac, idx_include, idx_sel = NULL, ylab){
   gp <- ggplot(dplot) + geom_smooth(aes(x=aac, y = x), method = "gam", formula = y ~ s(x, bs = "cs")) + 
     labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = ylab) + 
     scale_x_continuous(breaks = seq(0, 168, 24), minor_breaks = NULL) + 
+    theme_light() + theme(text = element_text(size = 18))
+  
+  gp
+}
+
+
+
+aacTrendCompare <- function(x, aac, idxGroup, idx_include, idx_sel = NULL, ylab){
+  dplot <- data.frame(
+    x = x,
+    aac = aac
+  )
+  
+  label <- NULL
+  if(idxGroup == 2){
+    dplot$group <- factor(flag_sex, levels = c("Male", "Female", "NA"))
+    idx_include <- idx_include & (flag_sex != "NA")
+    label <- "Sex"
+  } else if(idxGroup == 3){
+    dplot$group <- factor(flag_bw, levels = c("<1000", "1000-2499", "2500-3000", "3001-3500", "3501-4000",
+                                             "4001-5000", ">5000"))
+    label <- "Birth Weight"
+  } else if(idxGroup == 4){
+    dplot$group <- factor(flag_ga, levels = c("<=27", "28-36",  "37-38",  "39-40",
+                                              "41", "42", ">=43"))
+    label <- "Gestational Age"
+  } else if(idxGroup == 5){
+    dplot$group <- factor(flag_race, levels = c("Asian", "Black", "Hispanic", "White", 
+                                                "OtherUnknown"))
+    idx_include <- idx_include & (flag_race != "OtherUnknown")
+    label <- "Race"
+  } else if(idxGroup == 6){
+    dplot$group <- factor(flag_tpn, levels = c("NoTPN", "TPN", "NA"))
+    idx_include <- idx_include & (flag_tpn != "NA")
+    label <- "TPN"
+  } else {
+    "ERROR"
+  }
+  
+  
+  if(is.null(idx_sel)){
+    dplot <- dplot[idx_include, ]
+  } else {
+    dplot <- dplot[idx_include & idx_sel, ]
+  }
+  
+  gp <- ggplot(dplot) + geom_smooth(aes(x=aac, y = x, color = group, fill = group), method = "gam", formula = y ~ s(x, bs = "cs")) + 
+    labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = ylab) + 
+    scale_x_continuous(breaks = seq(0, 168, 24), minor_breaks = NULL) + 
+    labs(color = label, fill = label) + scale_color_npg() + 
     theme_light() + theme(text = element_text(size = 18))
   
   gp
