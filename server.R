@@ -138,6 +138,10 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  compareIndex <- reactive({
+    return(input$compare)
+  })
+  
   
   output$boxplot <- renderPlot({
     idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
@@ -146,8 +150,13 @@ shinyServer(function(input, output, session) {
   
   
   output$trendplot <- renderPlot({
-    idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-    aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
+    if(as.integer(compareIndex())==1){
+      idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
+      aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
+    } else {
+      idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
+      aacTrendCompare(getMeta()$meta, aac, as.integer(compareIndex()), idx_include, idx_sel, getMeta()$name)
+    }
   })
   
 })
