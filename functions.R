@@ -62,7 +62,9 @@ aacTrend <- function(x, aac, idx_include, idx_sel = NULL, ylab){
 
 
 
-aacTrendCompare <- function(x, aac, idxGroup, idx_include, idx_sel = NULL, ylab){
+aacTrendCompare <- function(x, aac, idxGroup, idx_include, idx_sel = NULL,  
+                            flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
+                            ylab){
   dplot <- data.frame(
     x = x,
     aac = aac

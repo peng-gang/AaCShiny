@@ -155,7 +155,9 @@ shinyServer(function(input, output, session) {
       aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
     } else {
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      aacTrendCompare(getMeta()$meta, aac, as.integer(compareIndex()), idx_include, idx_sel, getMeta()$name)
+      aacTrendCompare(getMeta()$meta, aac, as.integer(compareIndex()), idx_include, idx_sel, 
+                      flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
+                      getMeta()$name)
     }
   })
   
