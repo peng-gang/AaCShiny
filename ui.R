@@ -6,7 +6,7 @@ source("functions.R")
 shinyUI(
   fluidPage(
     titlePanel("RUSPtools",
-               title = tags$strong("The influence of age at blood collection to metabolic level")),
+               title = tags$strong("RUSPtools: Influence of Age at Blood Collection to Metabolic Levels")),
     
     sidebarLayout(
       sidebarPanel(
