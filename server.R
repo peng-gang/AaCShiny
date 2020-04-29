@@ -144,8 +144,15 @@ shinyServer(function(input, output, session) {
   
   
   output$boxplot <- renderPlot({
-    idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-    aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
+    if(as.integer(compareIndex())==1){
+      idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
+      aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
+    } else {
+      idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
+      aacBoxPlotCompare(getMeta()$meta, flag_aac, as.integer(compareIndex()), idx_include, idx_sel, 
+                 flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
+                 getMeta()$name)
+    }
   })
   
   

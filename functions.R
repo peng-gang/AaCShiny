@@ -40,6 +40,66 @@ aacBoxPlot <- function(x, flag_aac, idx_include, idx_sel = NULL, ylab){
   gp
 }
 
+
+aacBoxPlotCompare <- function(x, flag_aac, idxGroup, idx_include, idx_sel = NULL,
+                              flag_sex, flag_bw, flag_ga, flag_race, flag_tpn, ylab){
+  dplot <- data.frame(
+    x = x,
+    aac = flag_aac
+  )
+  
+  label <- NULL
+  if(idxGroup == 2){
+    dplot$group <- factor(flag_sex, levels = c("Male", "Female", "NA"))
+    idx_include <- idx_include & (flag_sex != "NA")
+    label <- "Sex"
+  } else if(idxGroup == 3){
+    dplot$group <- factor(flag_bw, levels = c("<1000", "1000-2499", "2500-3000", "3001-3500", "3501-4000",
+                                              "4001-5000", ">5000"))
+    label <- "Birth Weight"
+  } else if(idxGroup == 4){
+    dplot$group <- factor(flag_ga, levels = c("<=27", "28-36",  "37-38",  "39-40",
+                                              "41", "42", ">=43"))
+    label <- "Gestational Age"
+  } else if(idxGroup == 5){
+    dplot$group <- factor(flag_race, levels = c("Asian", "Black", "Hispanic", "White", 
+                                                "OtherUnknown"))
+    idx_include <- idx_include & (flag_race != "OtherUnknown")
+    label <- "Race"
+  } else if(idxGroup == 6){
+    dplot$group <- factor(flag_tpn, levels = c("NoTPN", "TPN", "NA"))
+    idx_include <- idx_include & (flag_tpn != "NA")
+    label <- "TPN"
+  } else {
+    "ERROR"
+  }
+  
+  
+  if(is.null(idx_sel)){
+    dplot <- dplot[idx_include, ]
+  } else {
+    dplot <- dplot[idx_include & idx_sel, ]
+  }
+  
+  num_pre <- sum(dplot$aac == "<24")
+  num_mid <- sum(dplot$aac == "24-48")
+  num_post <- sum(dplot$aac == "49-168")
+  
+  gp <- ggplot(dplot) + geom_boxplot(aes(x=aac, y = x, fill = group)) + 
+    geom_hline(yintercept = median(dplot$x[dplot$aac == "24-48"]), color = "#E18727FF") + 
+    labs(x="Age at Blood Collection (Hour)", y = ylab) + 
+    scale_x_discrete(
+      labels = c(
+        paste0("<24\n(n=", num_pre, ")"),
+        paste0("24-48\n(n=", num_mid, ")"),
+        paste0("49-168\n(n=", num_post, ")"))) + 
+    labs(fill = label) + scale_color_npg() + 
+    theme_light() + theme(text = element_text(size = 18))
+  
+  gp
+}
+
+
 aacTrend <- function(x, aac, idx_include, idx_sel = NULL, ylab){
   dplot <- data.frame(
     x = x,
