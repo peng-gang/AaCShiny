@@ -6,25 +6,25 @@ source("functions.R")
 
 load("www/500KClean.RData")
 
-
 shinyServer(function(input, output, session) {
   
   getMeta <- reactive({
     if(input$meta == "analytes"){
       ana_sel <- input$analyte
       if(length(ana_sel) == 0){
-        ## ERROR MESSAGE
-        showModal(
-          modalDialog(
-            title = "Warning!",
-            "At least one analyte should be selected and the default analyte is selected",
-            easyClose = TRUE
-          )
-        )
+        # ## ERROR MESSAGE
+        # showModal(
+        #   modalDialog(
+        #     title = "Warning!",
+        #     "At least one analyte should be selected and the default analyte is selected",
+        #     easyClose = TRUE
+        #   )
+        # )
         
-        updateSelectInput(
-          session, "analyte", selected = which(analytes_all=="C3")
-        )
+        # updateSelectInput(
+        #   session, "analyte", selected = which(analytes_all=="C3")
+        # )
+        
         meta <- meta_data[, which(analytes_all=="C3")]
         return(list(meta=meta, name = "C3"))
       } else if(length(ana_sel) == 1){
@@ -43,17 +43,17 @@ shinyServer(function(input, output, session) {
       name_den <- NULL
       
       if(length(num_sel) == 0){
-        ## ERROR MESSAGE
-        showModal(
-          modalDialog(
-            title = "Warning!",
-            "At least one analyte should be selected and the default analyte is selected",
-            easyClose = TRUE
-          )
-        )
-        updateSelectInput(
-          session, "numerator", selected = which(analytes_all=="C3")
-        )
+        # ## ERROR MESSAGE
+        # showModal(
+        #   modalDialog(
+        #     title = "Warning!",
+        #     "At least one analyte should be selected and the default analyte is selected",
+        #     easyClose = TRUE
+        #   )
+        # )
+        # updateSelectInput(
+        #   session, "numerator", selected = which(analytes_all=="C3")
+        # )
         meta_num <- meta_data[, which(analytes_all=="C3")]
         name_num <- "C3"
       } else if(length(num_sel) == 1){
@@ -67,16 +67,16 @@ shinyServer(function(input, output, session) {
       
       if(length(den_sel) == 0){
         ## ERROR MESSAGE
-        showModal(
-          modalDialog(
-            title = "Warning!",
-            "At least one analyte should be selected and the default analyte is selected",
-            easyClose = TRUE
-          )
-        )
-        updateSelectInput(
-          session, "denominator", selected = which(analytes_all=="C2")
-        )
+        # showModal(
+        #   modalDialog(
+        #     title = "Warning!",
+        #     "At least one analyte should be selected and the default analyte is selected",
+        #     easyClose = TRUE
+        #   )
+        # )
+        # updateSelectInput(
+        #   session, "denominator", selected = which(analytes_all=="C2")
+        # )
         meta_den <- meta_data[, which(analytes_all=="C2")]
         name_den <- "C2"
       } else if(length(den_sel) == 1){
