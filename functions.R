@@ -12,6 +12,16 @@ makeList <- function(x){
 
 
 aacBoxPlot <- function(x, flag_aac, idx_include, idx_sel = NULL, ylab){
+  if(is.null(x)){
+    gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select analytes from the left panel")) + 
+      geom_text(aes(x=x, y=y, label=label)) + 
+      scale_x_continuous(limits = c(0,1)) + 
+      scale_y_continuous(limits = c(0,1)) + 
+      theme_void() + theme(text = element_text(size = 24))
+    
+    return(gp)
+  }
+  
   dplot <- data.frame(
     x = x,
     aac = flag_aac
@@ -43,6 +53,16 @@ aacBoxPlot <- function(x, flag_aac, idx_include, idx_sel = NULL, ylab){
 
 aacBoxPlotCompare <- function(x, flag_aac, idxGroup, idx_include, idx_sel = NULL,
                               flag_sex, flag_bw, flag_ga, flag_race, flag_tpn, ylab){
+  if(is.null(x)){
+    gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select analytes from the left panel")) + 
+      geom_text(aes(x=x, y=y, label=label)) + 
+      scale_x_continuous(limits = c(0,1)) + 
+      scale_y_continuous(limits = c(0,1)) + 
+      theme_void() + theme(text = element_text(size = 24))
+    
+    return(gp)
+  }
+  
   dplot <- data.frame(
     x = x,
     aac = flag_aac
@@ -101,6 +121,9 @@ aacBoxPlotCompare <- function(x, flag_aac, idxGroup, idx_include, idx_sel = NULL
 
 
 aacTrend <- function(x, aac, idx_include, idx_sel = NULL, ylab){
+  if(is.null(x)){
+    return(NULL)
+  }
   dplot <- data.frame(
     x = x,
     aac = aac
@@ -125,6 +148,10 @@ aacTrend <- function(x, aac, idx_include, idx_sel = NULL, ylab){
 aacTrendCompare <- function(x, aac, idxGroup, idx_include, idx_sel = NULL,  
                             flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                             ylab){
+  if(is.null(x)){
+    return(NULL)
+  }
+  
   dplot <- data.frame(
     x = x,
     aac = aac

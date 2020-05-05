@@ -1,4 +1,5 @@
 library(shiny)
+library(shinybusy)
 
 
 source("parameters.R")
@@ -25,8 +26,9 @@ shinyServer(function(input, output, session) {
         #   session, "analyte", selected = which(analytes_all=="C3")
         # )
         
-        meta <- meta_data[, which(analytes_all=="C3")]
-        return(list(meta=meta, name = "C3"))
+        #meta <- meta_data[, which(analytes_all=="C3")]
+        #return(list(meta=meta, name = "C3"))
+        return(list(meta=NULL, name = NULL))
       } else if(length(ana_sel) == 1){
         meta <- meta_data[, as.integer(ana_sel)]
         return(list(meta=meta, name = analytes_all[as.integer(ana_sel)]))
@@ -54,8 +56,9 @@ shinyServer(function(input, output, session) {
         # updateSelectInput(
         #   session, "numerator", selected = which(analytes_all=="C3")
         # )
-        meta_num <- meta_data[, which(analytes_all=="C3")]
-        name_num <- "C3"
+        #meta_num <- meta_data[, which(analytes_all=="C3")]
+        #name_num <- "C3"
+        return(list(meta=NULL, name = NULL))
       } else if(length(num_sel) == 1){
         meta_num <- meta_data[, as.integer(num_sel)]
         name_num <- analytes_all[as.integer(num_sel)]
@@ -77,8 +80,9 @@ shinyServer(function(input, output, session) {
         # updateSelectInput(
         #   session, "denominator", selected = which(analytes_all=="C2")
         # )
-        meta_den <- meta_data[, which(analytes_all=="C2")]
-        name_den <- "C2"
+        #meta_den <- meta_data[, which(analytes_all=="C2")]
+        #name_den <- "C2"
+        return(list(meta=NULL, name = NULL))
       } else if(length(den_sel) == 1){
         meta_den <- meta_data[, as.integer(den_sel)]
         name_den <- analytes_all[as.integer(den_sel)]
@@ -144,28 +148,40 @@ shinyServer(function(input, output, session) {
   
   
   output$boxplot <- renderPlot({
+    bp <- NULL
+    show_spinner()
     if(as.integer(compareIndex())>-1){
+      renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
+      bp <- aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
     } else {
+      #output$boxplot <- renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      aacBoxPlotCompare(getMeta()$meta, flag_aac, as.integer(compareIndex()), idx_include, idx_sel, 
+      bp <- aacBoxPlotCompare(getMeta()$meta, flag_aac, as.integer(compareIndex()), idx_include, idx_sel, 
                  flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                  getMeta()$name)
     }
+    hide_spinner()
+    bp
   })
   
   
   output$trendplot <- renderPlot({
+    tp <- NULL
+    show_spinner()
     if(as.integer(compareIndex())==1){
+      #output$trendplot <- renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
+      tp <- aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
     } else {
+      #output$trendplot <- renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      aacTrendCompare(getMeta()$meta, aac, as.integer(compareIndex()), idx_include, idx_sel, 
+      tp <- aacTrendCompare(getMeta()$meta, aac, as.integer(compareIndex()), idx_include, idx_sel, 
                       flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                       getMeta()$name)
     }
+    hide_spinner()
+    tp
   })
   
 })
