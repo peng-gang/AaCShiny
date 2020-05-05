@@ -150,7 +150,7 @@ shinyServer(function(input, output, session) {
   output$boxplot <- renderPlot({
     bp <- NULL
     show_spinner()
-    if(as.integer(compareIndex())>-1){
+    if(as.integer(compareIndex())==1){
       renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
       bp <- aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
