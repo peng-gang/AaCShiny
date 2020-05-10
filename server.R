@@ -1,5 +1,5 @@
 library(shiny)
-library(shinybusy)
+#library(shinybusy)
 
 
 source("parameters.R")
@@ -149,7 +149,7 @@ shinyServer(function(input, output, session) {
   
   output$boxplot <- renderPlot({
     bp <- NULL
-    show_spinner()
+    #show_spinner()
     if(as.integer(compareIndex())==1){
       renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
@@ -161,14 +161,14 @@ shinyServer(function(input, output, session) {
                  flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                  getMeta()$name)
     }
-    hide_spinner()
+    #hide_spinner()
     bp
   })
   
   
   output$trendplot <- renderPlot({
     tp <- NULL
-    show_spinner()
+    #show_spinner()
     if(as.integer(compareIndex())==1){
       #output$trendplot <- renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
@@ -180,7 +180,7 @@ shinyServer(function(input, output, session) {
                       flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                       getMeta()$name)
     }
-    hide_spinner()
+    #hide_spinner()
     tp
   })
   
