@@ -32,7 +32,7 @@ shinyUI(
             )
           ),
           tabPanel(
-            "Ratio",
+            "Ratios",
             value = "ratio",
             tags$div(
               title = "Select numerator and denominator for the ratio. If multiple analytes are selected, they will be added",
@@ -113,9 +113,9 @@ shinyUI(
           radioButtons("compare", label = h3("Select comparing groups"),
                        choices = c(makeList(compare_group)), 
                        selected = 1)
-        ),
+        )
         
-        p("User Guide")
+        #p("User Guide")
       ),
       
       mainPanel(
