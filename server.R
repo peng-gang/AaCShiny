@@ -148,40 +148,40 @@ shinyServer(function(input, output, session) {
   
   
   output$boxplot <- renderPlot({
-    bp <- NULL
+    #bp <- NULL
     #show_spinner()
     if(as.integer(compareIndex())==1){
       renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      bp <- aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
+      aacBoxPlot(getMeta()$meta, flag_aac, idx_include, idx_sel, getMeta()$name)
     } else {
       #output$boxplot <- renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      bp <- aacBoxPlotCompare(getMeta()$meta, flag_aac, as.integer(compareIndex()), idx_include, idx_sel, 
+      aacBoxPlotCompare(getMeta()$meta, flag_aac, as.integer(compareIndex()), idx_include, idx_sel, 
                  flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                  getMeta()$name)
     }
     #hide_spinner()
-    bp
+    #bp
   })
   
   
   output$trendplot <- renderPlot({
-    tp <- NULL
+    #tp <- NULL
     #show_spinner()
     if(as.integer(compareIndex())==1){
       #output$trendplot <- renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      tp <- aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
+      aacTrend(getMeta()$meta, aac, idx_include, idx_sel, getMeta()$name)
     } else {
       #output$trendplot <- renderPlot(NULL)
       idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      tp <- aacTrendCompare(getMeta()$meta, aac, as.integer(compareIndex()), idx_include, idx_sel, 
+      aacTrendCompare(getMeta()$meta, aac, as.integer(compareIndex()), idx_include, idx_sel, 
                       flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                       getMeta()$name)
     }
     #hide_spinner()
-    tp
+    #tp
   })
   
 })
