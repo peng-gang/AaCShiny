@@ -29,8 +29,75 @@ shinyUI(
                 multiple = TRUE,
                 selected = which(analytes_all=="C3")
               )
-            )
+            ),
+            
+            hr(),
+            
+            tags$div(
+              title = "Select birth weight range to include in the figure",
+              checkboxGroupInput(
+                "bw",
+                label = h4("Birth Weight (g)"),
+                choices = makeList(bw_group),
+                selected = 2:4
+              )
+            ),
+            
+            tags$div(
+              title = "Select gestational age range to include in the figure",
+              checkboxGroupInput(
+                "ga",
+                label = h4("Gestational Age (week)"),
+                choices = makeList(ga_group),
+                selected = 2:4
+              )
+            ),
+            
+            tags$div(
+              title = "Select race/ethnicity group(s) to include in the figure",
+              checkboxGroupInput(
+                "race",
+                label = h4("Race/Ethnicity"),
+                choices = makeList(race_group),
+                selected = 1:length(race_group)
+              )
+            ),
+            
+            tags$div(
+              title = "Select sex to include in the figure",
+              checkboxGroupInput(
+                "sex",
+                label = h4("Sex"),
+                choices = makeList(sex_group),
+                selected = 1:length(sex_group)
+              )
+            ),
+            
+            tags$div(
+              title = "Select TPN status to include in the figure",
+              checkboxGroupInput(
+                "tpn",
+                label = h4("TPN"),
+                choices = makeList(tpn_group),
+                selected = 1
+              )
+            ),
+            
+            hr(),
+            
+            tags$div(
+              title = "Compare difference between groups within the selected category",
+              radioButtons("compare", label = h3("Select comparing groups"),
+                           choices = c(makeList(compare_group)), 
+                           selected = 1)
+            ),
+            
+            hr(),
+            
+            actionButton("btnSingle", "Submit")
           ),
+          
+          
           tabPanel(
             "Ratios",
             value = "ratio",
@@ -50,72 +117,80 @@ shinyUI(
                 multiple = TRUE,
                 selected =  which(analytes_all=="C2")
               )
-            )
+            ),
+            
+            hr(),
+            
+            tags$div(
+              title = "Select birth weight range to include in the figure",
+              checkboxGroupInput(
+                "bwRatio",
+                label = h4("Birth Weight (g)"),
+                choices = makeList(bw_group),
+                selected = 2:4
+              )
+            ),
+            
+            tags$div(
+              title = "Select gestational age range to include in the figure",
+              checkboxGroupInput(
+                "gaRatio",
+                label = h4("Gestational Age (week)"),
+                choices = makeList(ga_group),
+                selected = 2:4
+              )
+            ),
+            
+            tags$div(
+              title = "Select race/ethnicity group(s) to include in the figure",
+              checkboxGroupInput(
+                "raceRatio",
+                label = h4("Race/Ethnicity"),
+                choices = makeList(race_group),
+                selected = 1:length(race_group)
+              )
+            ),
+            
+            tags$div(
+              title = "Select sex to include in the figure",
+              checkboxGroupInput(
+                "sexRatio",
+                label = h4("Sex"),
+                choices = makeList(sex_group),
+                selected = 1:length(sex_group)
+              )
+            ),
+            
+            tags$div(
+              title = "Select TPN status to include in the figure",
+              checkboxGroupInput(
+                "tpnRatio",
+                label = h4("TPN"),
+                choices = makeList(tpn_group),
+                selected = 1
+              )
+            ),
+            
+            hr(),
+            
+            tags$div(
+              title = "Compare difference between groups within the selected category",
+              radioButtons("compareRatio", label = h3("Select comparing groups"),
+                           choices = c(makeList(compare_group)), 
+                           selected = 1)
+            ),
+            
+            hr(),
+            
+            actionButton("btnRatio", "Submit")
+          ),
+          
+          tabPanel(
+            "About",
+            value = "about",
+            p("User Guide")
           )
-        ),
-        
-        hr(),
-        
-        tags$div(
-          title = "Select birth weight range to include in the figure",
-          checkboxGroupInput(
-            "bw",
-            label = h4("Birth Weight (g)"),
-            choices = makeList(bw_group),
-            selected = 2:4
-          )
-        ),
-        
-        tags$div(
-          title = "Select gestational age range to include in the figure",
-          checkboxGroupInput(
-            "ga",
-            label = h4("Gestational Age (week)"),
-            choices = makeList(ga_group),
-            selected = 2:4
-          )
-        ),
-        
-        tags$div(
-          title = "Select race/ethnicity group(s) to include in the figure",
-          checkboxGroupInput(
-            "race",
-            label = h4("Race/Ethnicity"),
-            choices = makeList(race_group),
-            selected = 1:length(race_group)
-          )
-        ),
-        
-        tags$div(
-          title = "Select sex to include in the figure",
-          checkboxGroupInput(
-            "sex",
-            label = h4("Sex"),
-            choices = makeList(sex_group),
-            selected = 1:length(sex_group)
-          )
-        ),
-        
-        tags$div(
-          title = "Select TPN status to include in the figure",
-          checkboxGroupInput(
-            "tpn",
-            label = h4("TPN"),
-            choices = makeList(tpn_group),
-            selected = 1
-          )
-        ),
-        
-        hr(),
-        
-        tags$div(
-          title = "Compare difference between groups within the selected category",
-          radioButtons("compare", label = h3("Select comparing groups"),
-                       choices = c(makeList(compare_group)), 
-                       selected = 1)
         )
-        
-        #p("User Guide")
       ),
       
       mainPanel(
