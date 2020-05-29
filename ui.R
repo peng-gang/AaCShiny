@@ -1,4 +1,5 @@
 library(shiny)
+library(markdown)
 #library(shinybusy)
 
 source("parameters.R")
@@ -187,8 +188,8 @@ shinyUI(
           
           tabPanel(
             "About",
-            value = "about",
-            p("User Guide")
+            # value = "about",
+            includeMarkdown("content/About.md")
           )
         )
       ),
