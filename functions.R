@@ -33,7 +33,7 @@ aacBoxPlot <- function(x, flag_aac, idx_include, idx_sel = NULL, ylab){
     dplot <- dplot[idx_include & idx_sel, ]
   }
   
-  num_pre <- sum(dplot$aac == "<24")
+  num_pre <- sum(dplot$aac == "12-23")
   num_mid <- sum(dplot$aac == "24-48")
   num_post <- sum(dplot$aac == "49-168")
   
@@ -42,7 +42,7 @@ aacBoxPlot <- function(x, flag_aac, idx_include, idx_sel = NULL, ylab){
     labs(x="Age at Blood Collection (Hour)", y = ylab) + 
     scale_x_discrete(
       labels = c(
-        paste0("<24\n(n=", num_pre, ")"),
+        paste0("12-23\n(n=", num_pre, ")"),
         paste0("24-48\n(n=", num_mid, ")"),
         paste0("49-168\n(n=", num_post, ")"))) + 
     theme_light() + theme(text = element_text(size = 18))
@@ -101,7 +101,7 @@ aacBoxPlotCompare <- function(x, flag_aac, idxGroup, idx_include, idx_sel = NULL
     dplot <- dplot[idx_include & idx_sel, ]
   }
   
-  num_pre <- sum(dplot$aac == "<24")
+  num_pre <- sum(dplot$aac == "12-23")
   num_mid <- sum(dplot$aac == "24-48")
   num_post <- sum(dplot$aac == "49-168")
   
@@ -110,7 +110,7 @@ aacBoxPlotCompare <- function(x, flag_aac, idxGroup, idx_include, idx_sel = NULL
     labs(x="Age at Blood Collection (Hour)", y = ylab) + 
     scale_x_discrete(
       labels = c(
-        paste0("<24\n(n=", num_pre, ")"),
+        paste0("12-23\n(n=", num_pre, ")"),
         paste0("24-48\n(n=", num_mid, ")"),
         paste0("49-168\n(n=", num_post, ")"))) + 
     labs(fill = label) + scale_color_npg() + 
