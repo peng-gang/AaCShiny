@@ -381,13 +381,13 @@ shinyServer(function(input, output, session) {
     if(compareIdx==1){
       #renderPlot(NULL)
       idx_sel <- bwIdx & gaIdx & raceIdx & sexIdx & tpnIdx
-      return(aacBoxPlot(metaData$meta, flag_aac, idx_include, idx_sel, metaData$name))
+      return(aacBoxPlot72(metaData$meta, aac, idx_include, idx_sel, metaData$name))
     } else {
       #renderPlot(NULL)
       idx_sel <- bwIdx & gaIdx & raceIdx & sexIdx & tpnIdx
       #output$boxplot <- renderPlot(NULL)
       #idx_sel <- bwIndex() & gaIndex() & raceIndex() & sexIndex() & tpnIndex()
-      return(aacBoxPlotCompare(metaData$meta, flag_aac, compareIdx, idx_include, idx_sel, 
+      return(aacBoxPlotCompare72(metaData$meta, aac, compareIdx, idx_include, idx_sel, 
                         flag_sex, flag_bw, flag_ga, flag_race, flag_tpn,
                         metaData$name))
     }
