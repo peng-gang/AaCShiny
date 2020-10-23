@@ -6,7 +6,7 @@ The purpose of the application is to visualize the differences of metabolite lev
 #### Instructions
 
 Click `Analytes` to view the changes of a selected individual or a combination of metabolites (e.g. C3+C2) and click `Ratios` to view the changes of a metabolite ratio (e.g. C3/C2) within or across different clinical variable groups in relation to AaBC. The comparisons across different groups could be viewed by first choosing one of the parameters under the ’select comparing groups’ menu, and then choose the sub-divided groups from the upper menu for that parameter. 
-The boxplot shows the concrete changes of the metabolite level(s)/ratio in three different AaBC groups: 12-23 hours, 24-48 hours, and 49-168 hours, respectively. The smoothed line graph indicates the changes of the mean of the metabolite level(s)/ratio across AaBC. The shading area shows the 95% confidence interval of the mean. 
+The boxplot shows the concrete changes of the metabolite level(s)/ratio in three different AaBC groups: 12-23 hours, 24-48 hours, and 49-72 hours, respectively. The smoothed line graph indicates the changes of the mean of the metabolite level(s)/ratio across AaBC. The shading area shows the 95% confidence interval of the mean. 
 
 #### Data
 
