@@ -5,7 +5,7 @@ bw_group <- c("1000-2499", "2500-3000", "3001-3500", "3501-4000", "4001-5000")
 ga_group <- c("28-36", "37-38", "39-40", "41",  "42")
 race_group <- c("Asian", "Black", "Hispanic", "White")
 tpn_group <- c("NoTPN", "TPN")
-compare_group <- c("No Comparison", "Sex", "Birth Weight", "Gestational Age", "Race", "TPN")
+compare_group <- c("No Comparison", "Sex", "Birth Weight", "Gestational Age", "Race/Ethnicity", "TPN")
 
 analytes_all <- c(
   "Glycine", "Alanine", "Proline", "Valine", "5-Oxoproline", "Leucine/Isoleucine", "Ornithine", "Methionine", "Arginine", "Citrulline", 

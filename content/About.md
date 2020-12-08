@@ -10,7 +10,7 @@ The boxplot shows the concrete changes of the metabolite level(s)/ratio in three
 
 #### Data
 
-Data from 500,000 screen-negative singleton infants born between 2013 and 2017 were selected at random by the California NBS program that included metabolic analytes measured by MS/MS as well as BW, GA, sex, race/ethnicity, AaBC, and TPN. The California Department of Public Health is not responsible for the results or conclusions drawn by the authors of this publication.
+Data from 500,539 screen-negative singleton infants born between 2013 and 2017 were selected at random by the California NBS program that included metabolic analytes measured by MS/MS as well as BW, GA, sex, race/ethnicity, AaBC, and TPN. The California Department of Public Health is not responsible for the results or conclusions drawn by the authors of this publication.
 
 #### Code
 
