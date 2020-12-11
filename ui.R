@@ -10,7 +10,7 @@ shinyUI(
     #use_busy_spinner(spin = "fading-circle"),
     
     titlePanel("RUSPtools",
-               title = tags$strong("RUSPtools: Influence of Age at Blood Collection to Metabolite Levels")),
+               title = tags$strong("RUSPtools: Relation between Metabolite Levels and Age at Blood Collection")),
     
     sidebarLayout(
       sidebarPanel(
